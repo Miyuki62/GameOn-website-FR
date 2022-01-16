@@ -57,7 +57,7 @@ const CGUErrorMsg = document.getElementById ('CGU-error-msg')
 const valid = document.getElementById ('valid');
 const validCloseBtn = document.getElementsByClassName('btn-close');
 
-
+//enpeche l'action par defaut du bouton submit
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 })
@@ -73,7 +73,9 @@ function validate ()
   let locationChecked;
   let CGUChecked;
 
+  //form verifie que le prénom possède bien 2 caractères et que se soit bien des lettre
   if (!first.value.match(/(.*[a-z]){2}/i) || first.value == ' ' || first.value.length < 2) {
+    //si non affiche les erreur
     firstErrorMsg.innerText = 'Veuillez entrer 2 caractères ou plus pour le champ du Prénom.';
     firstErrorMsg.style.color = 'red';
     firstErrorMsg.style.fontSize = '0.8rem';
@@ -82,11 +84,14 @@ function validate ()
     firstErrorMsg.style.display = 'block';
     firstChecked = false;
   } else {
+    //si oui enlève les erreur
     firstErrorMsg.style.display = 'none';
     first.style.border = 'none';
     firstChecked = true;
   };
+   //form verifie que le nom possède bien 2 caractères et que se soit bien des lettre
   if (!last.value.match(/(.*[a-z]){2}/i) || last.value == ' ' || last.value.length < 2) { 
+    //si non affiche les erreur
     lastErrorMsg.innerText = 'Veuillez entrer 2 caractères ou plus pour le champ du Nom.';
     lastErrorMsg.style.color = 'red';
     lastErrorMsg.style.fontSize = '0.8rem';
@@ -95,26 +100,30 @@ function validate ()
     lastErrorMsg.style.display = 'block';
     lastChecked = false;      
   }  else {
+    //si oui enlève les erreur
     lastErrorMsg.style.display = 'none';
     last.style.border = 'none';
     lastChecked = true;
   };
-
+//form verifie que le l'email soit bien un format email
   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail.value)) { 
+    //si non affiche les erreur
     mailErrorMsg.innerText = 'Veuillez entrer une email valide';
     mailErrorMsg.style.color = 'red';
     mailErrorMsg.style.fontSize = '0.8rem';
     mailErrorMsg.style.marginTop = '10px';
-    email.style.border = 'solid red 2px'; 
-    mail.style.display = 'block';
+    mailErrorMsg.style.display = 'block';
+    mail.style.border = 'solid red 2px'; 
     emailChecked = false;        
   }  else {
+    //si oui enlève les erreur
     mailErrorMsg.style.display = 'none';
     mail.style.border = 'none';
     emailChecked = true;
   };
-
+//form verifie que se soit bien une date
   if (!birthDate.value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) { 
+    //si non affiche les erreur
     birthdateErrorMsg.innerText = 'Veuillez saisir votre date de naissance';
     birthdateErrorMsg.style.color = 'red';
     birthdateErrorMsg.style.fontSize = '0.8rem';
@@ -123,26 +132,30 @@ function validate ()
     birthdateErrorMsg.style.display = 'block';
     birthdateChecked = false;   
   } else {
+    //si oui enlève les erreur
     birthdateErrorMsg.style.display = 'none';
     birthDate.style.border = 'none';
     birthdateChecked = true;      
   }
-
+//form verifie que se soit bien un nombre
   if (!quantity.value.match(/^[0-9]+$/)) { 
+    //si non affiche les erreur
     quantityErrorMsg.innerText = 'Vous devez indiquer un nombre';
     quantityErrorMsg.style.color = 'red';
     quantityErrorMsg.style.fontSize = '0.8rem';
     quantityErrorMsg.style.marginTop = '10px';
     quantity.style.border = 'solid red 2px';
-    quantity.style.display = 'block';
+    quantityErrorMsg.style.display = 'block';
     quantityChecked = false;   
   } else {
+    //si oui enlève les erreur
     quantityErrorMsg.style.display = 'none';
     quantity.style.border = 'none';
     quantityChecked = true;
   };
-
+//form verifie que une location est bien sélectionner 
   if (!location1.checked && !location2.checked && !location3.checked && !location4.checked && !location5.checked && !location6.checked) { 
+    //si non affiche les erreur
     locationErrorMsg.innerText = 'Vous devez choisir une ville pour participer';
     locationErrorMsg.style.color = 'red';
     locationErrorMsg.style.fontSize = '0.8rem';
@@ -150,11 +163,13 @@ function validate ()
     locationErrorMsg.style.display = 'block';
     locationChecked = false;            
   } else {
+    //si oui enlève les erreur
     locationErrorMsg.style.display = 'none';
     locationChecked = true;
   };
-
+//form verifie que les CGU sont bien cochée
   if (!CGU.checked) {
+    //si non affiche les erreur
     CGUErrorMsg.innerText = 'Vous devez vérifier que vous acceptez les termes et conditions';
     CGUErrorMsg.style.color = 'red';
     CGUErrorMsg.style.fontSize = '0.8rem';
@@ -163,14 +178,15 @@ function validate ()
     CGUErrorMsg.style.display = 'block';
     CGUChecked = false;   
   } else {
+    //si oui enlève les erreur
     CGUErrorMsg.style.display = 'none';
     CGUChecked = true;
   };
-
+  //verifie que chaque champ du formulaire est valide
   if (firstChecked == true && lastChecked == true && emailChecked == true && birthdateChecked == true && quantityChecked == true && locationChecked == true && CGUChecked == true) {
     form.style.display = "none";
     valid.style.display = "flex";
   }
 }
-
+//ecoute un click pour fermer le form
 validCloseBtn[0].addEventListener("click", closeModal);
